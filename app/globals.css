@@ -1,26 +1,99 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground: #231f1f;
+  --primary-color: #ed3324;
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+}
+
+.custom-menu {
+  padding: 0 !important;
+}
+
+.custom-dropdown .ant-dropdown-menu {
+  padding: 0px !important;
+}
+
+.custom-dropdown .ant-dropdown-menu-item {
+  padding: 0px 12px !important;
+  padding-top: 10px !important;
+  padding-bottom: 14px !important;
+}
+
+.custom-select {
+  padding: 0 !important;
+  border-radius: 4px !important;
+  box-shadow:
+    0 1px 2px 0 rgba(0, 0, 0, 0.1),
+    0 2px 6px 2px rgba(0, 0, 0, 0.1);
+}
+
+.custom-select .ant-select-item-option {
+  padding: 0 !important;
+  min-height: unset !important;
+  line-height: normal !important;
+}
+
+.custom-select .ant-select-item-option:not(:last-child) {
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.ant-modal-container {
+  padding: 0 !important;
+}
+
+.ant-segmented-item-label {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ant-segmented-item-label .list-bullet-icon {
+  width: 20px;
+  height: 20px;
+}
+
+/* Hide scrollbar but keep scroll working */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE & Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.ant-collapse-header {
+  background-color: white;
+  flex-direction: row-reverse;
+}
+
+.ant-collapse-title {
+  font-weight: 500;
+}
+
+.ant-collapse-panel {
+  background-color: white !important;
+}
+
+.ant-collapse {
+  overflow: hidden !important;
+  border: 1px solid #e5e6e6 !important;
+}
+
+.ant-collapse-body {
+  padding-top: 16px !important;
+}
+
+.custom-collapse {
+  margin-top: 24px !important;
 }
