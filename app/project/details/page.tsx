@@ -1,11 +1,33 @@
 "use client";
 
-import { Collapse, Select } from "antd";
+import { Collapse, Dropdown, MenuProps, Select } from "antd";
 import Image from "next/image";
 import { useState } from "react";
 
 const ProjectDetails = () => {
   const [selectedTab, setSelectedTab] = useState<string>("Kitchen Equipments");
+
+  const items: MenuProps["items"] = [
+    {
+      label: (
+        <div className="font-noto text-[#E91000] flex items-center gap-3 text-sm">
+          <Image src="/PlusPrimary.svg" width={20} height={20} alt="plus" />
+          Create new BOQ
+        </div>
+      ),
+      key: "1",
+    },
+
+    {
+      label: (
+        <div className="font-noto text-[#E91000] flex items-center gap-3 text-sm">
+          <Image src="/Copy.svg" width={20} height={20} alt="plus" />
+          Duplicate Current BOQ
+        </div>
+      ),
+      key: "2",
+    },
+  ];
 
   return (
     <>
@@ -20,17 +42,17 @@ const ProjectDetails = () => {
               className="filter invert transform rotate-180 cursor-pointer"
             />
 
-            <div className="w-9 h-9 rounded border border-[#E5E6E6] p-1 flex items-center justify-center">
-              <Image
-                src="/company-two.svg"
-                width={100}
-                height={100}
-                alt="company-logo"
-              />
-            </div>
-
             <div>
-              <p className="text-sm font-medium">New Floor Renovation</p>
+              <div className="text-sm font-medium flex items-center gap-1">
+                <p>New Floor Renovation</p>
+                <Image
+                  src="/PencilBlack.svg"
+                  width={15}
+                  height={15}
+                  alt="edit-icon"
+                  className="cursor-pointer"
+                />
+              </div>
               <div className="flex items-center text-[#59595C] font-noto text-xs">
                 <span>Antinorm Pvt. Ltd</span>
                 <span className="w-4 h-4 inline-flex items-center justify-center">
@@ -45,90 +67,125 @@ const ProjectDetails = () => {
             </div>
           </div>
 
-          <div className="w-9 h-9 rounded-full relative overflow-hidden">
-            <Image src="/user-icon.svg" fill alt="user-image" />
+          <div className="flex items-center gap-3">
+            <div className="rounded bg-[#F1F1F1] px-3 py-1">
+              <p className="font-noto text-xs text-[#59595C]">
+                Total Project Cost
+              </p>
+              <p className="text-sm font-medium">₹ 90L</p>
+            </div>
+
+            <div className="rounded bg-[#F1F1F1] px-3 py-1">
+              <p className="font-noto text-xs text-[#59595C]">Cost/ Sq.ft.</p>
+              <p className="text-sm font-medium">₹ 50,000</p>
+            </div>
           </div>
         </div>
 
-        <div className="p-3 rounded-lg border border-[#E5E6E6] bg-white mt-3 mx-6">
-          <div className="flex items-center justify-between pb-2 border-b border-[#E5E6E6]">
-            <div className="h-[34px] flex items-center justify-center py-[6px] pl-2 pr-3 rounded-lg border border-[#E5E6E6] bg-[#F1F1F1] gap-[6px] cursor-pointer">
-              <Image
-                src="/LockSimple.svg"
-                width={16}
-                height={16}
-                alt="lock-icon"
-              />
-              <span className="font-noto text-sm">20/09/2025_BOQ</span>
-              <Image
-                src="/CaretDown.svg"
-                width={16}
-                height={16}
-                alt="caret-down"
-              />
+        <div>
+          <div className="px-6 pt-2  bg-white flex items-center gap-2 border-b border-[#E5E6E6]">
+            <div className="px-3 py-2 bg-[#FEF5F4] text-primary flex items-center gap-2 text-sm border-b-2 border-primary rounded-tl rounded-tr">
+              <Image src="/LockPrimary.svg" width={20} height={20} alt="lock" />
+              24/02/2026_BOQ
             </div>
-            <button className="h-9 text-white rounded-lg bg-primary px-5 flex items-center justify-center text-xs">
-              Generate Quotation
-            </button>
-          </div>
-
-          <div className="mt-2 flex items-center gap-2">
-            <div className="cursor-pointer relative py-1 pl-2 pr-3 flex items-center justify-center gap-[6px] rounded-lg border border-[#E5E6E6]">
-              <Image
-                src="/SlidersHorizontal.svg"
-                width={16}
-                height={16}
-                alt="filter-icon"
-              />
-              <span className="font-noto text-sm">Filter</span>
-              <Image
-                src="/CaretDown.svg"
-                width={16}
-                height={16}
-                alt="caret-down"
-              />
-
-              <Select
-                options={[
-                  { value: "Zones", label: "Zones" },
-                  { value: "Product Type", label: "Product Type" },
-                ]}
-                popupMatchSelectWidth={false}
-                className="!absolute inset-0 opacity-0 w-full h-full"
-                classNames={{
-                  popup: {
-                    root: "custom-select",
+            <div className="px-3 cursor-pointer">
+              <Dropdown
+                styles={{
+                  item: {
+                    padding: 0,
                   },
                 }}
-                optionRender={(option) => (
-                  <div className="p-3 font-noto text-sm text-[#59595C]">
-                    {option?.value}
-                  </div>
-                )}
-              />
+                menu={{ items }}
+                placement="bottom"
+                classNames={{
+                  root: "custom-dropdown",
+                }}
+              >
+                <Image
+                  src="/PlusGrey.svg"
+                  width={20}
+                  height={20}
+                  alt="plus-icon"
+                />
+
+                {/* <div
+                style={{
+                  boxShadow:
+                    "0 1px 2px 0 rgba(0, 0, 0, 0.10), 0 2px 6px 2px rgba(0, 0, 0, 0.10)",
+                }}
+                className="w-[220px] bg-white rounded-lg overflow-hidden"
+              >
+                <div className="p-3 flex items-center gap-3">
+                  Create New BOQ
+                </div>
+                <div className="p-3 flex items-center gap-3">
+                  Duplicate Current BOQ
+                </div>
+              </div> */}
+              </Dropdown>
+            </div>
+          </div>
+
+          <div className="flex items-center mt-3 px-6 gap-2">
+            <div>
+              <div className="flex bg-white items-center relative rounded-lg border border-[#E5E6E6] min-w-[105px] h-8 gap-[6px] font-noto text-sm py-1 px-3 pl-2">
+                Category
+                <Image
+                  src="/CaretDown.svg"
+                  width={16}
+                  height={16}
+                  alt="caret-down"
+                />
+                <Select
+                  options={[
+                    {
+                      value: "Zones",
+                      label: "Zones",
+                    },
+                    {
+                      value: "Category",
+                      label: "Category",
+                    },
+                  ]}
+                  popupMatchSelectWidth={false}
+                  className="!absolute inset-0 opacity-0 w-full h-full"
+                  classNames={{
+                    popup: {
+                      root: "custom-select w-[144px]",
+                    },
+                  }}
+                  optionRender={(option) => {
+                    const data = option.data as {
+                      value: string;
+                      label: string;
+                      desc: string;
+                    };
+
+                    return (
+                      <div className="p-3 font-noto text-sm text-[#59595C]">
+                        <p className="text-sm">{data.label}</p>
+                      </div>
+                    );
+                  }}
+                />
+              </div>
             </div>
 
-            <div className="flex items-center flex-1 gap-2 text-sm font-noto overflow-x-auto no-scrollbar">
+            <div className="flex flex-1 gap-2 overflow-x-auto">
               {[
-                {
-                  id: 1,
-                  name: "Kitchen Equipments",
-                },
-                {
-                  id: 2,
-                  name: "Meeting Room",
-                },
-                {
-                  id: 3,
-                  name: "Cabin 1",
-                },
+                { id: 1, name: "Chair" },
+                { id: 2, name: "Kitchen Equipments" },
+                { id: 3, name: "Modular Furniture" },
+                { id: 4, name: "Carpet" },
+                { id: 5, name: "Fire Alarm System" },
+                { id: 6, name: "Lights" },
+                { id: 7, name: "Raised Flooring" },
               ]?.map((item) => (
                 <div
-                  key={item.id}
-                  onClick={() => setSelectedTab(item?.name)}
-                  className={`px-2 py-1 rounded-lg hover:bg-[#F1F1F1] cursor-pointer flex-shrink-0 ${selectedTab === item?.name ? "bg-[#FDEBEA] text-primary" : ""}`}
+                  key={item?.id}
+                  className="px-2 py-1 h-8 flex items-center justify-center rounded-lg max-w-max border border-[#E5E6E6] bg-white font-noto text-sm cursor-pointer"
                 >
-                  {item.name}
+                  {item?.name}
                 </div>
               ))}
             </div>

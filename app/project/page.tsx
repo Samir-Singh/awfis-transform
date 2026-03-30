@@ -9,13 +9,19 @@ const { TextArea } = Input;
 
 const Project = () => {
   const router = useRouter();
-  const [openModal, setOpenModal] = useState(false);
+  const [modal, setModal] = useState({
+    project: false,
+    delete: false,
+  });
   const [step, setStep] = useState(1);
 
   const items: MenuProps["items"] = [
     {
       label: (
-        <div className="font-poppins text-[#E91000] flex items-center gap-3">
+        <div
+          onClick={() => setModal((prev) => ({ ...prev, delete: true }))}
+          className="font-poppins text-[#E91000] flex items-center gap-3"
+        >
           <Image src="/Trash.svg" width={20} height={20} alt="trash" />
           Delete
         </div>
@@ -35,7 +41,7 @@ const Project = () => {
 
           <div className="flex items-center gap-3">
             <button
-              onClick={() => setOpenModal(true)}
+              onClick={() => setModal((prev) => ({ ...prev, project: true }))}
               className="bg-primary h-9 py-2 px-4 flex items-center justify-center text-white rounded-lg text-sm font-medium gap-2"
             >
               <Image src="/plus.svg" width={20} height={20} alt="plus-icon" />
@@ -251,27 +257,69 @@ const Project = () => {
       </div>
 
       <Modal
-        open={openModal}
+        open={modal?.delete}
+        closable={false}
+        footer={false}
+        centered={true}
+        width={320}
+        onCancel={() => {
+          setModal((prev) => ({
+            ...prev,
+            delete: false,
+          }));
+        }}
+      >
+        <div className="p-6">
+          <p className="text-center font-noto font-semibold">
+            Delete Project ?
+          </p>
+          <p className="mt-2 font-noto text-sm text-[#59595C] text-center">
+            Are you sure you want to delete this project?
+          </p>
+          <div className="mt-8 flex items-center gap-3">
+            <button
+              onClick={() => setModal((prev) => ({ ...prev, delete: false }))}
+              className="flex-1 border border-primary h-9 flex items-center justify-center text-primary rounded-lg font-medium"
+            >
+              Cancel
+            </button>
+            <button className="flex-1 border border-primary bg-primary h-9 text-white rounded-lg font-medium">
+              Delete
+            </button>
+          </div>
+        </div>
+      </Modal>
+
+      <Modal
+        open={modal?.project}
         closable={false}
         footer={false}
         centered={true}
         width={480}
         onCancel={() => {
-          setOpenModal(false);
+          setModal((prev) => ({
+            ...prev,
+            project: false,
+          }));
           setStep(1);
         }}
       >
         <div className="rounded-lg font-noto">
           <div className="px-6 py-4 flex items-center justify-between border-b border-[#E5E6E6]">
             <div>
-              <p className="font-poppins text-sm font-medium">
+              <p className="font-noto text-sm font-semibold">
                 Create New Project
               </p>
-              <p className="text-xs text-[#59595C]">Step {step} of 2</p>
+              <p className="text-xs font-noto text-[#59595C]">
+                Step {step} of 2
+              </p>
             </div>
             <Image
               onClick={() => {
-                setOpenModal(false);
+                setModal((prev) => ({
+                  ...prev,
+                  project: false,
+                }));
                 setStep(1);
               }}
               src="/Close.svg"
@@ -314,24 +362,13 @@ const Project = () => {
 
                 <div>
                   <p className="text-xs font-medium text-[#59595C]">
-                    Client Logo
+                    Total Area (Sq.ft.)*
                   </p>
-                  <div className="flex items-center gap-4 mt-1">
-                    <div className="w-14 h-14 border border-[#E5E6E6] rounded flex items-center justify-center">
-                      <Image
-                        src="/gallary.svg"
-                        width={24}
-                        height={24}
-                        alt="gallary-icon"
-                      />
-                    </div>
-
-                    <div className="flex items-center">
-                      <span className="flex items-center underline text-primary text-sm cursor-pointer">
-                        Upload
-                      </span>
-                    </div>
-                  </div>
+                  <Input
+                    placeholder="Enter"
+                    type="number"
+                    className="!mt-1 !px-3 !py-2 !font-noto !text-sm placeholder:!text-[#929497]"
+                  />
                 </div>
 
                 <div>
@@ -364,6 +401,58 @@ const Project = () => {
 
             {step === 2 && (
               <>
+                <div>
+                  <p className="text-xs font-medium text-[#59595C]">
+                    Project Type *
+                  </p>
+                  <div className="mt-1 flex gap-3"></div>
+                  <div className="flex items-center justify-between relative rounded-lg border border-[#E5E6E6] h-10 gap-[6px] font-noto text-sm py-2 px-3">
+                    Select
+                    <Image
+                      src="/CaretDown.svg"
+                      width={24}
+                      height={24}
+                      alt="caret-down"
+                    />
+                    <Select
+                      options={[
+                        {
+                          value: "Managed Office (MO)",
+                          label: "Managed Office (MO)",
+                        },
+                        {
+                          value: "Design & Build",
+                          label: "Design & Build",
+                        },
+                        {
+                          value: "Banquet",
+                          label: "Banquet",
+                        },
+                      ]}
+                      popupMatchSelectWidth={true}
+                      className="!absolute inset-0 opacity-0 w-full h-full"
+                      classNames={{
+                        popup: {
+                          root: "custom-select",
+                        },
+                      }}
+                      optionRender={(option) => {
+                        const data = option.data as {
+                          value: string;
+                          label: string;
+                          desc: string;
+                        };
+
+                        return (
+                          <div className="p-3 font-poppins">
+                            <p className="text-sm">{data.label}</p>
+                          </div>
+                        );
+                      }}
+                    />
+                  </div>
+                </div>
+
                 <div>
                   <p className="text-xs font-medium text-[#59595C]">
                     Design Theme *
@@ -424,6 +513,62 @@ const Project = () => {
 
                 <div>
                   <p className="text-xs font-medium text-[#59595C]">
+                    Awfis Theme *
+                  </p>
+                  <div className="mt-1 flex gap-3"></div>
+                  <div className="flex items-center justify-between relative rounded-lg border border-[#E5E6E6] h-10 gap-[6px] font-noto text-sm py-2 px-3">
+                    Select
+                    <Image
+                      src="/CaretDown.svg"
+                      width={24}
+                      height={24}
+                      alt="caret-down"
+                    />
+                    <Select
+                      options={[
+                        {
+                          value: "Awfis 5.0",
+                          label: "Awfis 5.0",
+                        },
+                        {
+                          value: "Awfis 6.0",
+                          label: "Awfis 6.0",
+                        },
+                        {
+                          value: "Gold",
+                          label: "Gold",
+                        },
+                        {
+                          value: "Elite",
+                          label: "Elite",
+                        },
+                      ]}
+                      popupMatchSelectWidth={true}
+                      className="!absolute inset-0 opacity-0 w-full h-full"
+                      classNames={{
+                        popup: {
+                          root: "custom-select",
+                        },
+                      }}
+                      optionRender={(option) => {
+                        const data = option.data as {
+                          value: string;
+                          label: string;
+                          desc: string;
+                        };
+
+                        return (
+                          <div className="p-3 font-poppins">
+                            <p className="text-sm">{data.label}</p>
+                          </div>
+                        );
+                      }}
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-xs font-medium text-[#59595C]">
                     Description
                   </p>
 
@@ -431,6 +576,9 @@ const Project = () => {
                     autoSize={{ minRows: 3, maxRows: 3 }}
                     className="!mt-1"
                   />
+                  <p className="mt-1 font-noto text-xs font-medium text-[#59595C]">
+                    0/200 words
+                  </p>
                 </div>
 
                 <div>
@@ -508,17 +656,20 @@ const Project = () => {
           <div className="px-6 py-4 flex items-center justify-between border-t border-[#E5E6E6]">
             <button
               onClick={() => {
-                setOpenModal(false);
+                setModal((prev) => ({
+                  ...prev,
+                  project: false,
+                }));
                 setStep(1);
               }}
-              className="flex items-center justify-center w-[85px] h-9 border border-primary rounded-lg font-poppins text-xs font-medium text-primary"
+              className="flex items-center justify-center w-[93px] h-9 border border-primary rounded-lg font-poppins text-sm font-medium text-primary"
             >
               Cancel
             </button>
             {step === 1 && (
               <button
                 onClick={() => setStep((prev) => prev + 1)}
-                className="flex items-center justify-center w-[93px] h-9 gap-2 bg-primary rounded-lg font-poppins text-xs font-medium text-white"
+                className="flex items-center justify-center w-[93px] h-9 gap-2 bg-primary rounded-lg font-poppins text-sm font-medium text-white"
               >
                 Next
                 <Image
@@ -532,7 +683,7 @@ const Project = () => {
             {step === 2 && (
               <button
                 onClick={() => router.push("/project/details")}
-                className="h-9 rounded-lg bg-primary text-white px-5 font-poppins text-xs"
+                className="h-9 w-[143px] rounded-lg bg-primary text-white px-5 font-poppins text-sm font-medium"
               >
                 Create Project
               </button>
