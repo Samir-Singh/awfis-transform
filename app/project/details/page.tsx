@@ -1,12 +1,17 @@
 "use client";
 
 import { Collapse, Dropdown, MenuProps, Modal, Select } from "antd";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { useState } from "react";
 
 const ProjectDetails = () => {
   const [selectedTab, setSelectedTab] = useState<string>("Chair");
   const [createNewBOQ, setCreateNewBOQ] = useState(false);
+  const [showSidebar, setShowSidebar] = useState({
+    open: false,
+    animate: false,
+  });
 
   const items: MenuProps["items"] = [
     {
@@ -269,7 +274,12 @@ const ProjectDetails = () => {
                         <td className="p-3">Green ergonomic chair</td>
 
                         <td className="p-3">
-                          <span className="cursor-pointer text-[#346DFF] underline">
+                          <span
+                            onClick={() =>
+                              setShowSidebar({ animate: true, open: true })
+                            }
+                            className="cursor-pointer text-[#346DFF] underline"
+                          >
                             Chair
                           </span>
                         </td>
@@ -1287,6 +1297,165 @@ const ProjectDetails = () => {
           )}
         />
       </div>
+
+      {showSidebar?.open && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: showSidebar?.animate ? 1 : 0 }}
+          transition={{ duration: 0.5, ease: "easeInOut" }}
+          className="fixed z-[9999] top-0 left-0 right-0 bottom-0 w-full h-full"
+        >
+          <motion.div
+            initial={{ x: "100vw", opacity: 0 }}
+            animate={
+              showSidebar?.animate
+                ? { x: 0, opacity: 1 }
+                : { x: "100vw", opacity: 0 }
+            }
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            style={{ boxShadow: "0 4px 16px 0 rgba(135, 135, 135, 0.25)" }}
+            className="bg-white w-[50%] h-full absolute right-0 rounded-tl-xl rounded-bl-xl border border-[#D1D2D3]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="relative flex h-full">
+              <div
+                onClick={() => {
+                  setShowSidebar((prev) => ({ ...prev, animate: false }));
+                  setTimeout(() => {
+                    setShowSidebar((prev) => ({
+                      ...prev,
+                      open: false,
+                    }));
+                  }, 500);
+                }}
+                style={{ boxShadow: "0 4px 16px 0 rgba(135, 135, 135, 0.25)" }}
+                className="absolute cursor-pointer top-10 -left-20 w-10 h-10 rounded-full bg-white flex items-center justify-center border border-[#D1D2D3]"
+              >
+                <Image
+                  src="/CrossBlack.svg"
+                  width={16}
+                  height={16}
+                  alt="close"
+                />
+              </div>
+
+              <div className="w-40 border-r border-[#D1D2D3] h-full p-4">
+                <div className="w-full h-32 border border-[#D1D2D3] rounded-lg overflow-hidden relative">
+                  <Image src="/chair.png" fill alt="chair" />
+                </div>
+
+                <div className="mt-2 font-noto">
+                  <p className="text-sm font-medium">Amardeep Design</p>
+                  <p className="mt-1 text-xs text-[#59595C]">Vento Mid Back</p>
+                  <p className="mt-1 text-sm font-medium">₹8,490</p>
+                </div>
+
+                <div className="mt-2 w-full h-[27px] rounded-[20px] bg-[#FDEBEA] flex items-center justify-center text-xs font-medium">
+                  Default Product
+                </div>
+              </div>
+
+              <div className="flex-1 overflow-y-auto pb-4">
+                <div className="p-4 sticky top-0 left-0 right-0 z-50 bg-white">
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-medium">Chair & Seaters</p>
+                      <p className="mt-1 font-noto text-xs text-[#929497] font-normal">
+                        25 products found
+                      </p>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <Image
+                        src="/MagnifyingGlassBlack.svg"
+                        width={16}
+                        height={16}
+                        alt="search"
+                      />
+
+                      <Image
+                        src="/Funnel.svg"
+                        width={16}
+                        height={16}
+                        alt="filter"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="mt-3 flex items-center gap-4 font-noto">
+                    <div className="flex items-center gap-[6px] rounded-lg border border-[#E5E6E6] text-sm py-[6px] pl-2 pr-3">
+                      <Image
+                        src="/SlidersHorizontal.svg"
+                        width={16}
+                        height={16}
+                        alt="caret-down"
+                      />
+                      Sort by Price
+                      <Image
+                        src="/CaretDown.svg"
+                        width={16}
+                        height={16}
+                        alt="caret-down"
+                      />
+                    </div>
+
+                    <div className="flex items-center gap-[6px] rounded-lg border border-[#E5E6E6] text-sm py-[6px] pl-2 pr-3">
+                      Brand
+                      <Image
+                        src="/CaretDown.svg"
+                        width={16}
+                        height={16}
+                        alt="caret-down"
+                      />
+                    </div>
+
+                    <div className="flex items-center gap-[6px] rounded-lg border border-[#E5E6E6] text-sm py-[6px] pl-2 pr-3">
+                      Colour
+                      <Image
+                        src="/CaretDown.svg"
+                        width={16}
+                        height={16}
+                        alt="caret-down"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid-cols-3 gap-4 grid px-4">
+                  {[
+                    { id: 1 },
+                    { id: 2 },
+                    { id: 3 },
+                    { id: 4 },
+                    { id: 5 },
+                    { id: 6 },
+                    { id: 7 },
+                    { id: 8 },
+                    { id: 9 },
+                  ]?.map((item) => (
+                    <div
+                      key={item?.id}
+                      className="rounded-xl border border-[#D1D2D3] overflow-hidden cursor-pointer"
+                    >
+                      <div className="h-[138px] w-full relative">
+                        <Image src="/Chair.png" fill alt="chair" />
+                      </div>
+
+                      <div className="p-3 font-noto">
+                        <p className="text-xs font-medium">Amardeep Design</p>
+                        <p className="mt-1 text-xs text-[#59595C]">
+                          Tesla Mid Back
+                        </p>
+                        <p className="mt-1 text-sm font-medium">₹1,299</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
 
       <Modal
         open={createNewBOQ}
