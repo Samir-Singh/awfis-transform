@@ -12,6 +12,7 @@ const ProjectDetails = () => {
     open: false,
     animate: false,
   });
+  const [showItemDetails, setShowItemDetails] = useState(false);
 
   const items: MenuProps["items"] = [
     {
@@ -261,7 +262,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -275,9 +281,10 @@ const ProjectDetails = () => {
 
                         <td className="p-3">
                           <span
-                            onClick={() =>
-                              setShowSidebar({ animate: true, open: true })
-                            }
+                            onClick={() => {
+                              setShowSidebar({ animate: true, open: true });
+                              setShowItemDetails(false);
+                            }}
                             className="cursor-pointer text-[#346DFF] underline"
                           >
                             Chair
@@ -327,7 +334,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -388,7 +400,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -449,7 +466,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -510,7 +532,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -618,7 +645,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -679,7 +711,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -740,7 +777,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -801,7 +843,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -862,7 +909,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -978,7 +1030,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -1039,7 +1096,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -1100,7 +1162,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -1161,7 +1228,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -1222,7 +1294,12 @@ const ProjectDetails = () => {
                       <tr className="font-noto text-xs font-medium">
                         <td className="p-3">
                           <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
-                            <Image src="/chair.png" fill alt="chair-icon" />
+                            <Image
+                              src="/chair.png"
+                              fill
+                              alt="chair-icon"
+                              className="object-cover"
+                            />
                           </div>
                         </td>
 
@@ -1341,7 +1418,12 @@ const ProjectDetails = () => {
 
               <div className="w-40 border-r border-[#D1D2D3] h-full p-4">
                 <div className="w-full h-32 border border-[#D1D2D3] rounded-lg overflow-hidden relative">
-                  <Image src="/chair.png" fill alt="chair" />
+                  <Image
+                    src="/chair.png"
+                    fill
+                    alt="chair"
+                    className="object-cover"
+                  />
                 </div>
 
                 <div className="mt-2 font-noto">
@@ -1356,101 +1438,184 @@ const ProjectDetails = () => {
               </div>
 
               <div className="flex-1 overflow-y-auto pb-4">
-                <div className="p-4 sticky top-0 left-0 right-0 z-50 bg-white">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <p className="font-medium">Chair & Seaters</p>
-                      <p className="mt-1 font-noto text-xs text-[#929497] font-normal">
-                        25 products found
-                      </p>
-                    </div>
+                {!showItemDetails ? (
+                  <>
+                    <div className="p-4 sticky top-0 left-0 right-0 z-50 bg-white">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <p className="font-medium">Chair & Seaters</p>
+                          <p className="mt-1 font-noto text-xs text-[#929497] font-normal">
+                            25 products found
+                          </p>
+                        </div>
 
-                    <div className="flex items-center gap-2">
-                      <Image
-                        src="/MagnifyingGlassBlack.svg"
-                        width={16}
-                        height={16}
-                        alt="search"
-                      />
+                        <div className="flex items-center gap-2">
+                          <Image
+                            src="/MagnifyingGlassBlack.svg"
+                            width={16}
+                            height={16}
+                            alt="search"
+                          />
 
-                      <Image
-                        src="/Funnel.svg"
-                        width={16}
-                        height={16}
-                        alt="filter"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="mt-3 flex items-center gap-4 font-noto">
-                    <div className="flex items-center gap-[6px] rounded-lg border border-[#E5E6E6] text-sm py-[6px] pl-2 pr-3">
-                      <Image
-                        src="/SlidersHorizontal.svg"
-                        width={16}
-                        height={16}
-                        alt="caret-down"
-                      />
-                      Sort by Price
-                      <Image
-                        src="/CaretDown.svg"
-                        width={16}
-                        height={16}
-                        alt="caret-down"
-                      />
-                    </div>
-
-                    <div className="flex items-center gap-[6px] rounded-lg border border-[#E5E6E6] text-sm py-[6px] pl-2 pr-3">
-                      Brand
-                      <Image
-                        src="/CaretDown.svg"
-                        width={16}
-                        height={16}
-                        alt="caret-down"
-                      />
-                    </div>
-
-                    <div className="flex items-center gap-[6px] rounded-lg border border-[#E5E6E6] text-sm py-[6px] pl-2 pr-3">
-                      Colour
-                      <Image
-                        src="/CaretDown.svg"
-                        width={16}
-                        height={16}
-                        alt="caret-down"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <div className="grid-cols-3 gap-4 grid px-4">
-                  {[
-                    { id: 1 },
-                    { id: 2 },
-                    { id: 3 },
-                    { id: 4 },
-                    { id: 5 },
-                    { id: 6 },
-                    { id: 7 },
-                    { id: 8 },
-                    { id: 9 },
-                  ]?.map((item) => (
-                    <div
-                      key={item?.id}
-                      className="rounded-xl border border-[#D1D2D3] overflow-hidden cursor-pointer"
-                    >
-                      <div className="h-[138px] w-full relative">
-                        <Image src="/Chair.png" fill alt="chair" />
+                          <Image
+                            src="/Funnel.svg"
+                            width={16}
+                            height={16}
+                            alt="filter"
+                          />
+                        </div>
                       </div>
 
-                      <div className="p-3 font-noto">
-                        <p className="text-xs font-medium">Amardeep Design</p>
-                        <p className="mt-1 text-xs text-[#59595C]">
-                          Tesla Mid Back
-                        </p>
-                        <p className="mt-1 text-sm font-medium">₹1,299</p>
+                      <div className="mt-3 flex items-center gap-4 font-noto">
+                        <div className="flex items-center gap-[6px] rounded-lg border border-[#E5E6E6] text-sm py-[6px] pl-2 pr-3">
+                          <Image
+                            src="/SlidersHorizontal.svg"
+                            width={16}
+                            height={16}
+                            alt="caret-down"
+                          />
+                          Sort by Price
+                          <Image
+                            src="/CaretDown.svg"
+                            width={16}
+                            height={16}
+                            alt="caret-down"
+                          />
+                        </div>
+
+                        <div className="flex items-center gap-[6px] rounded-lg border border-[#E5E6E6] text-sm py-[6px] pl-2 pr-3">
+                          Brand
+                          <Image
+                            src="/CaretDown.svg"
+                            width={16}
+                            height={16}
+                            alt="caret-down"
+                          />
+                        </div>
+
+                        <div className="flex items-center gap-[6px] rounded-lg border border-[#E5E6E6] text-sm py-[6px] pl-2 pr-3">
+                          Colour
+                          <Image
+                            src="/CaretDown.svg"
+                            width={16}
+                            height={16}
+                            alt="caret-down"
+                          />
+                        </div>
                       </div>
                     </div>
-                  ))}
-                </div>
+
+                    <div className="grid-cols-3 gap-4 grid px-4">
+                      {[
+                        { id: 1 },
+                        { id: 2 },
+                        { id: 3 },
+                        { id: 4 },
+                        { id: 5 },
+                        { id: 6 },
+                        { id: 7 },
+                        { id: 8 },
+                        { id: 9 },
+                      ]?.map((item) => (
+                        <div
+                          key={item?.id}
+                          onClick={() => setShowItemDetails(true)}
+                          className="rounded-xl border border-[#D1D2D3] overflow-hidden cursor-pointer"
+                        >
+                          <div className="h-[138px] w-full relative">
+                            <Image src="/Chair.png" fill alt="chair" />
+                          </div>
+
+                          <div className="p-3 font-noto">
+                            <p className="text-xs font-medium">
+                              Amardeep Design
+                            </p>
+                            <p className="mt-1 text-xs text-[#59595C]">
+                              Tesla Mid Back
+                            </p>
+                            <p className="mt-1 text-sm font-medium">₹1,299</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="py-6 px-4 flex items-center sticky top-0 left-0 right-0 z-50 bg-white">
+                      <Image
+                        src="/ArrowLeft.svg"
+                        width={20}
+                        height={20}
+                        alt="arrow-left"
+                        className="cursor-pointer"
+                        onClick={() => setShowItemDetails(false)}
+                      />
+                    </div>
+
+                    <div className="px-4 font-noto">
+                      <div className="w-full h-[340px] relative border border-[#D1D2D3] rounded-xl overflow-hidden">
+                        <Image
+                          src="/Chair.png"
+                          fill
+                          alt="chair"
+                          className="object-fill"
+                        />
+                      </div>
+
+                      <div className="mt-4 flex flex-col gap-4">
+                        <div>
+                          <p className="font-medium">Amardeep Design</p>
+                          <p className="mt-1 text-sm text-[#575F6E]">
+                            Vento Mid Back
+                          </p>
+                        </div>
+
+                        <div className="flex items-center gap-3">
+                          <div className="w-[26px] h-[26px] rounded-full bg-[#414C52]"></div>
+                          <div className="w-[26px] h-[26px] rounded-full bg-[#930A00]"></div>
+                          <div className="w-[26px] h-[26px] rounded-full bg-[#929497]"></div>
+                          <div className="w-[26px] h-[26px] rounded-full bg-[#073611]"></div>
+                        </div>
+
+                        <div className="flex items-center gap-[6px] font-medium">
+                          <span>₹5,000</span>
+                          <span className="line-through text-sm text-[#929497]">
+                            ₹ (11,999)
+                          </span>
+                          <span className="text-[#073611] text-sm">
+                            30% OFF
+                          </span>
+                        </div>
+
+                        <div>
+                          <span
+                            style={{
+                              background:
+                                "linear-gradient(90deg, #FAF3D4 0%, #FAF3D4 100%)",
+                            }}
+                            className="inline-flex items-center justify-center rounded-[99px] border border-[#F7E69A] text-xs font-medium px-3 py-1"
+                          >
+                            One Size
+                          </span>
+                        </div>
+
+                        <hr className="border-dashed" />
+                      </div>
+
+                      <div className="mt-4">
+                        <div className="text-sm">Product Details</div>
+
+                        <div className="mt-2 text-xs text-[#575F6E]">
+                          <p>Set content: 1 Office chair</p>
+                          <p>Color: Grey</p>
+                          <p>Pattern: Solid</p>
+                          <p>Type: Office chair</p>
+                          <p>Back Height: High Black</p>
+                        </div>
+                      </div>
+                    </div>
+                  </>
+                )}
               </div>
             </div>
           </motion.div>
