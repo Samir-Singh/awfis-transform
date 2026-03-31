@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 const ProjectDetails = () => {
-  const [selectedTab, setSelectedTab] = useState<string>("Kitchen Equipments");
+  const [selectedTab, setSelectedTab] = useState<string>("Chair");
   const [createNewBOQ, setCreateNewBOQ] = useState(false);
 
   const items: MenuProps["items"] = [
@@ -83,6 +83,10 @@ const ProjectDetails = () => {
               <p className="font-noto text-xs text-[#59595C]">Cost/ Sq.ft.</p>
               <p className="text-sm font-medium">₹ 50,000</p>
             </div>
+
+            <button className="text-white bg-primary px-5 h-9 flex items-center justify-center rounded-lg font-medium text-sm">
+              Generate Quotation
+            </button>
           </div>
         </div>
 
@@ -111,21 +115,6 @@ const ProjectDetails = () => {
                   height={20}
                   alt="plus-icon"
                 />
-
-                {/* <div
-                style={{
-                  boxShadow:
-                    "0 1px 2px 0 rgba(0, 0, 0, 0.10), 0 2px 6px 2px rgba(0, 0, 0, 0.10)",
-                }}
-                className="w-[220px] bg-white rounded-lg overflow-hidden"
-              >
-                <div className="p-3 flex items-center gap-3">
-                  Create New BOQ
-                </div>
-                <div className="p-3 flex items-center gap-3">
-                  Duplicate Current BOQ
-                </div>
-              </div> */}
               </Dropdown>
             </div>
           </div>
@@ -187,7 +176,8 @@ const ProjectDetails = () => {
               ]?.map((item) => (
                 <div
                   key={item?.id}
-                  className="px-2 py-1 h-8 flex items-center justify-center rounded-lg max-w-max border border-[#E5E6E6] bg-white font-noto text-sm cursor-pointer"
+                  onClick={() => setSelectedTab(item?.name)}
+                  className={`${item?.name === selectedTab ? "text-primary bg-[#FDEBEA]" : "bg-white border border-[#E5E6E6]"} px-2 py-1 h-8 flex items-center justify-center rounded-lg max-w-max font-noto text-sm cursor-pointer`}
                 >
                   {item?.name}
                 </div>
@@ -200,6 +190,386 @@ const ProjectDetails = () => {
       <div className="px-6">
         <Collapse
           activeKey={selectedTab}
+          expandIcon={() => null}
+          onChange={(key) => setSelectedTab(key?.toString() || "")}
+          items={[
+            {
+              key: "Chair",
+              label: (
+                <div className="flex items-center justify-between">
+                  <span>Chair</span>
+
+                  <div className="flex items-center gap-7">
+                    {selectedTab === "Chair" && (
+                      <button
+                        onClick={(e) => e.stopPropagation()}
+                        className="flex items-center justify-center w-[134px] h-9 border border-primary text-primary font-medium text-sm rounded-lg"
+                      >
+                        + Add Items
+                      </button>
+                    )}
+
+                    <Image
+                      src={
+                        selectedTab === "Chair"
+                          ? "/CaretUpBlack.svg"
+                          : "/CaretDownBlack.svg"
+                      }
+                      width={14}
+                      height={14}
+                      alt="expand-icon"
+                      className="mr-3"
+                    />
+                  </div>
+                </div>
+              ),
+              children: (
+                <div>
+                  <table className="w-full table-fixed">
+                    <thead>
+                      <tr className="bg-[#FAFAFA]">
+                        {[
+                          { id: 1, name: "Image", width: "w-[80px]" },
+                          { id: 2, name: "Sub Category", width: "w-[160px]" },
+                          { id: 3, name: "Description", width: "w-[128px]" },
+                          { id: 4, name: "Category" },
+                          { id: 5, name: "Zone" },
+                          { id: 6, name: "Size" },
+                          { id: 7, name: "Units" },
+                          { id: 8, name: "Quantity" },
+                          { id: 9, name: "Rate Type" },
+                          { id: 10, name: "Price/Unit" },
+                          { id: 11, name: "Total Price" },
+                          { id: 12, name: "Actions" },
+                        ]?.map((item) => (
+                          <th
+                            className={`font-medium p-3 text-xs text-[#6D6E71] text-left ${item?.width ? item.width : ""}`}
+                            key={item.id}
+                          >
+                            {item.name}
+                          </th>
+                        ))}
+                      </tr>
+                    </thead>
+
+                    <tbody className="text-[#231f1f] divide-y">
+                      <tr className="font-noto text-xs font-medium">
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
+                        </td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
+                          </span>
+                        </td>
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
+                          </span>
+                        </td>
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
+                        </td>
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr className="font-noto text-xs font-medium">
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
+                        </td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
+                          </span>
+                        </td>
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
+                          </span>
+                        </td>
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
+                        </td>
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr className="font-noto text-xs font-medium">
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
+                        </td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
+                          </span>
+                        </td>
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
+                          </span>
+                        </td>
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
+                        </td>
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr className="font-noto text-xs font-medium">
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
+                        </td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
+                          </span>
+                        </td>
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
+                          </span>
+                        </td>
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
+                        </td>
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr className="font-noto text-xs font-medium">
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
+                        </td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
+                          </span>
+                        </td>
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
+                          </span>
+                        </td>
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
+                        </td>
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              ),
+            },
+          ]}
+          accordion
+          bordered={false}
+        />
+
+        <Collapse
+          className="custom-collapse"
+          activeKey={selectedTab}
           onChange={(key) => setSelectedTab(key?.toString() || "")}
           items={[
             {
@@ -209,21 +579,23 @@ const ProjectDetails = () => {
                 <div>
                   <table className="w-full table-fixed">
                     <thead>
-                      <tr>
+                      <tr className="bg-[#FAFAFA]">
                         {[
-                          { id: 1, name: "S.no.", width: "w-[69px]" },
-                          { id: 2, name: "Category", width: "w-[120px]" },
-                          { id: 3, name: "Description", width: "w-[168px]" },
-                          { id: 4, name: "Zone" },
-                          { id: 5, name: "Quantity" },
-                          { id: 6, name: "Unit" },
-                          { id: 7, name: "Rate Type" },
-                          { id: 8, name: "Sizes" },
-                          { id: 9, name: "Base Price" },
-                          { id: 10, name: "Total Price" },
+                          { id: 1, name: "Image", width: "w-[80px]" },
+                          { id: 2, name: "Sub Category", width: "w-[160px]" },
+                          { id: 3, name: "Description", width: "w-[128px]" },
+                          { id: 4, name: "Category" },
+                          { id: 5, name: "Zone" },
+                          { id: 6, name: "Size" },
+                          { id: 7, name: "Units" },
+                          { id: 8, name: "Quantity" },
+                          { id: 9, name: "Rate Type" },
+                          { id: 10, name: "Price/Unit" },
+                          { id: 11, name: "Total Price" },
+                          { id: 12, name: "Actions" },
                         ]?.map((item) => (
                           <th
-                            className={`font-normal py-1 px-3 text-sm text-[#575F6E] text-left ${item?.width ? item.width : ""}`}
+                            className={`font-medium p-3 text-xs text-[#6D6E71] text-left ${item?.width ? item.width : ""}`}
                             key={item.id}
                           >
                             {item.name}
@@ -232,103 +604,309 @@ const ProjectDetails = () => {
                       </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody className="text-[#231f1f] divide-y">
                       <tr className="font-noto text-xs font-medium">
-                        <td className="px-3 py-2 text-sm">1</td>
-                        <td className="truncate px-3 py-2 underline text-sm text-[#346DFF]">
-                          <span className="cursor-pointer">
-                            Kitchen Equipments
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
+                        </td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
                           </span>
                         </td>
-                        <td className="truncate px-3 py-2">
-                          Top Made By 16 Swg. & U/s. Made By 18 Swg. 304 Grade,
-                          Top Boarder Size 65mm And U/s. Boarder Size 38mm,
-                          Vertical Pipe 38mm x 38mm x 16 Swg, Two U/s. In Pipe
-                          Section, And Vertical Pipe Should Be On Adjustable
-                          With Nylon Bullet Feet.
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
+                          </span>
                         </td>
-                        <td className="px-3 py-2">Kitchen</td>
-                        <td className="px-3 py-2">6</td>
-                        <td className="px-3 py-2">Pcs</td>
-                        <td className="px-3 py-2">Rate Contract</td>
-                        <td className="px-3 py-2">1350 x 700 x 800</td>
-                        <td className="px-3 py-2">₹5,000</td>
-                        <td className="px-3 py-2 text-primary text-sm">
-                          ₹30,000
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
+                        </td>
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
                         </td>
                       </tr>
 
                       <tr className="font-noto text-xs font-medium">
-                        <td className="px-3 py-2 text-sm">1</td>
-                        <td className="truncate px-3 py-2 underline text-sm text-[#346DFF]">
-                          <span className="cursor-pointer">
-                            Kitchen Equipments
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
+                        </td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
                           </span>
                         </td>
-                        <td className="truncate px-3 py-2">
-                          Top Made By 16 Swg. & U/s. Made By 18 Swg. 304 Grade,
-                          Top Boarder Size 65mm And U/s. Boarder Size 38mm,
-                          Vertical Pipe 38mm x 38mm x 16 Swg, Two U/s. In Pipe
-                          Section, And Vertical Pipe Should Be On Adjustable
-                          With Nylon Bullet Feet.
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
+                          </span>
                         </td>
-                        <td className="px-3 py-2">Kitchen</td>
-                        <td className="px-3 py-2">6</td>
-                        <td className="px-3 py-2">Pcs</td>
-                        <td className="px-3 py-2">Rate Contract</td>
-                        <td className="px-3 py-2">1350 x 700 x 800</td>
-                        <td className="px-3 py-2">₹5,000</td>
-                        <td className="px-3 py-2 text-primary text-sm">
-                          ₹30,000
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
+                        </td>
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
                         </td>
                       </tr>
 
                       <tr className="font-noto text-xs font-medium">
-                        <td className="px-3 py-2 text-sm">1</td>
-                        <td className="truncate px-3 py-2 underline text-sm text-[#346DFF]">
-                          <span className="cursor-pointer">
-                            Kitchen Equipments
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
+                        </td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
                           </span>
                         </td>
-                        <td className="truncate px-3 py-2">
-                          Top Made By 16 Swg. & U/s. Made By 18 Swg. 304 Grade,
-                          Top Boarder Size 65mm And U/s. Boarder Size 38mm,
-                          Vertical Pipe 38mm x 38mm x 16 Swg, Two U/s. In Pipe
-                          Section, And Vertical Pipe Should Be On Adjustable
-                          With Nylon Bullet Feet.
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
+                          </span>
                         </td>
-                        <td className="px-3 py-2">Kitchen</td>
-                        <td className="px-3 py-2">6</td>
-                        <td className="px-3 py-2">Pcs</td>
-                        <td className="px-3 py-2">Rate Contract</td>
-                        <td className="px-3 py-2">1350 x 700 x 800</td>
-                        <td className="px-3 py-2">₹5,000</td>
-                        <td className="px-3 py-2 text-primary text-sm">
-                          ₹30,000
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
+                        </td>
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
                         </td>
                       </tr>
+
                       <tr className="font-noto text-xs font-medium">
-                        <td className="px-3 py-2 text-sm">1</td>
-                        <td className="truncate px-3 py-2 underline text-sm text-[#346DFF]">
-                          <span className="cursor-pointer">
-                            Kitchen Equipments
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
+                        </td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
                           </span>
                         </td>
-                        <td className="truncate px-3 py-2">
-                          Top Made By 16 Swg. & U/s. Made By 18 Swg. 304 Grade,
-                          Top Boarder Size 65mm And U/s. Boarder Size 38mm,
-                          Vertical Pipe 38mm x 38mm x 16 Swg, Two U/s. In Pipe
-                          Section, And Vertical Pipe Should Be On Adjustable
-                          With Nylon Bullet Feet.
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
+                          </span>
                         </td>
-                        <td className="px-3 py-2">Kitchen</td>
-                        <td className="px-3 py-2">6</td>
-                        <td className="px-3 py-2">Pcs</td>
-                        <td className="px-3 py-2">Rate Contract</td>
-                        <td className="px-3 py-2">1350 x 700 x 800</td>
-                        <td className="px-3 py-2">₹5,000</td>
-                        <td className="px-3 py-2 text-primary text-sm">
-                          ₹30,000
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
+                        </td>
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
+                        </td>
+                      </tr>
+
+                      <tr className="font-noto text-xs font-medium">
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
+                        </td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
+                          </span>
+                        </td>
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
+                          </span>
+                        </td>
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
+                        </td>
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
                         </td>
                       </tr>
                     </tbody>
@@ -351,31 +929,33 @@ const ProjectDetails = () => {
 
         <Collapse
           className="custom-collapse"
-          onChange={(key) => setSelectedTab(key?.toString() || "")}
           activeKey={selectedTab}
+          onChange={(key) => setSelectedTab(key?.toString() || "")}
           items={[
             {
-              key: "Meeting Room",
-              label: "Meeting Room",
+              key: "Modular Furniture",
+              label: "Modular Furniture",
               children: (
                 <div>
                   <table className="w-full table-fixed">
                     <thead>
-                      <tr>
+                      <tr className="bg-[#FAFAFA]">
                         {[
-                          { id: 1, name: "S.no.", width: "w-[69px]" },
-                          { id: 2, name: "Category", width: "w-[120px]" },
-                          { id: 3, name: "Description", width: "w-[168px]" },
-                          { id: 4, name: "Zone" },
-                          { id: 5, name: "Quantity" },
-                          { id: 6, name: "Unit" },
-                          { id: 7, name: "Rate Type" },
-                          { id: 8, name: "Sizes" },
-                          { id: 9, name: "Base Price" },
-                          { id: 10, name: "Total Price" },
+                          { id: 1, name: "Image", width: "w-[80px]" },
+                          { id: 2, name: "Sub Category", width: "w-[160px]" },
+                          { id: 3, name: "Description", width: "w-[128px]" },
+                          { id: 4, name: "Category" },
+                          { id: 5, name: "Zone" },
+                          { id: 6, name: "Size" },
+                          { id: 7, name: "Units" },
+                          { id: 8, name: "Quantity" },
+                          { id: 9, name: "Rate Type" },
+                          { id: 10, name: "Price/Unit" },
+                          { id: 11, name: "Total Price" },
+                          { id: 12, name: "Actions" },
                         ]?.map((item) => (
                           <th
-                            className={`font-normal py-1 px-3 text-sm text-[#575F6E] text-left ${item?.width ? item.width : ""}`}
+                            className={`font-medium p-3 text-xs text-[#6D6E71] text-left ${item?.width ? item.width : ""}`}
                             key={item.id}
                           >
                             {item.name}
@@ -384,255 +964,309 @@ const ProjectDetails = () => {
                       </tr>
                     </thead>
 
-                    <tbody>
+                    <tbody className="text-[#231f1f] divide-y">
                       <tr className="font-noto text-xs font-medium">
-                        <td className="px-3 py-2 text-sm">1</td>
-                        <td className="truncate px-3 py-2 underline text-sm text-[#346DFF]">
-                          <span className="cursor-pointer">
-                            Kitchen Equipments
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
+                        </td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
                           </span>
                         </td>
-                        <td className="truncate px-3 py-2">
-                          Top Made By 16 Swg. & U/s. Made By 18 Swg. 304 Grade,
-                          Top Boarder Size 65mm And U/s. Boarder Size 38mm,
-                          Vertical Pipe 38mm x 38mm x 16 Swg, Two U/s. In Pipe
-                          Section, And Vertical Pipe Should Be On Adjustable
-                          With Nylon Bullet Feet.
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
+                          </span>
                         </td>
-                        <td className="px-3 py-2">Kitchen</td>
-                        <td className="px-3 py-2">6</td>
-                        <td className="px-3 py-2">Pcs</td>
-                        <td className="px-3 py-2">Rate Contract</td>
-                        <td className="px-3 py-2">1350 x 700 x 800</td>
-                        <td className="px-3 py-2">₹5,000</td>
-                        <td className="px-3 py-2 text-primary text-sm">
-                          ₹30,000
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
+                        </td>
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
                         </td>
                       </tr>
 
                       <tr className="font-noto text-xs font-medium">
-                        <td className="px-3 py-2 text-sm">1</td>
-                        <td className="truncate px-3 py-2 underline text-sm text-[#346DFF]">
-                          <span className="cursor-pointer">
-                            Kitchen Equipments
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
+                        </td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
                           </span>
                         </td>
-                        <td className="truncate px-3 py-2">
-                          Top Made By 16 Swg. & U/s. Made By 18 Swg. 304 Grade,
-                          Top Boarder Size 65mm And U/s. Boarder Size 38mm,
-                          Vertical Pipe 38mm x 38mm x 16 Swg, Two U/s. In Pipe
-                          Section, And Vertical Pipe Should Be On Adjustable
-                          With Nylon Bullet Feet.
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
+                          </span>
                         </td>
-                        <td className="px-3 py-2">Kitchen</td>
-                        <td className="px-3 py-2">6</td>
-                        <td className="px-3 py-2">Pcs</td>
-                        <td className="px-3 py-2">Rate Contract</td>
-                        <td className="px-3 py-2">1350 x 700 x 800</td>
-                        <td className="px-3 py-2">₹5,000</td>
-                        <td className="px-3 py-2 text-primary text-sm">
-                          ₹30,000
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
+                        </td>
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
                         </td>
                       </tr>
 
                       <tr className="font-noto text-xs font-medium">
-                        <td className="px-3 py-2 text-sm">1</td>
-                        <td className="truncate px-3 py-2 underline text-sm text-[#346DFF]">
-                          <span className="cursor-pointer">
-                            Kitchen Equipments
-                          </span>
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
                         </td>
-                        <td className="truncate px-3 py-2">
-                          Top Made By 16 Swg. & U/s. Made By 18 Swg. 304 Grade,
-                          Top Boarder Size 65mm And U/s. Boarder Size 38mm,
-                          Vertical Pipe 38mm x 38mm x 16 Swg, Two U/s. In Pipe
-                          Section, And Vertical Pipe Should Be On Adjustable
-                          With Nylon Bullet Feet.
-                        </td>
-                        <td className="px-3 py-2">Kitchen</td>
-                        <td className="px-3 py-2">6</td>
-                        <td className="px-3 py-2">Pcs</td>
-                        <td className="px-3 py-2">Rate Contract</td>
-                        <td className="px-3 py-2">1350 x 700 x 800</td>
-                        <td className="px-3 py-2">₹5,000</td>
-                        <td className="px-3 py-2 text-primary text-sm">
-                          ₹30,000
-                        </td>
-                      </tr>
-                      <tr className="font-noto text-xs font-medium">
-                        <td className="px-3 py-2 text-sm">1</td>
-                        <td className="truncate px-3 py-2 underline text-sm text-[#346DFF]">
-                          <span className="cursor-pointer">
-                            Kitchen Equipments
-                          </span>
-                        </td>
-                        <td className="truncate px-3 py-2">
-                          Top Made By 16 Swg. & U/s. Made By 18 Swg. 304 Grade,
-                          Top Boarder Size 65mm And U/s. Boarder Size 38mm,
-                          Vertical Pipe 38mm x 38mm x 16 Swg, Two U/s. In Pipe
-                          Section, And Vertical Pipe Should Be On Adjustable
-                          With Nylon Bullet Feet.
-                        </td>
-                        <td className="px-3 py-2">Kitchen</td>
-                        <td className="px-3 py-2">6</td>
-                        <td className="px-3 py-2">Pcs</td>
-                        <td className="px-3 py-2">Rate Contract</td>
-                        <td className="px-3 py-2">1350 x 700 x 800</td>
-                        <td className="px-3 py-2">₹5,000</td>
-                        <td className="px-3 py-2 text-primary text-sm">
-                          ₹30,000
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              ),
-            },
-          ]}
-          accordion
-          bordered={false}
-          expandIcon={({ isActive }) => (
-            <Image
-              src={isActive ? "/CaretUpBlack.svg" : "/CaretDownBlack.svg"}
-              width={14}
-              height={14}
-              alt="expand-icon"
-            />
-          )}
-        />
 
-        <Collapse
-          className="custom-collapse"
-          onChange={(key) => setSelectedTab(key?.toString() || "")}
-          activeKey={selectedTab}
-          items={[
-            {
-              key: "Cabin 1",
-              label: "Cabin 1",
-              children: (
-                <div>
-                  <table className="w-full table-fixed">
-                    <thead>
-                      <tr>
-                        {[
-                          { id: 1, name: "S.no.", width: "w-[69px]" },
-                          { id: 2, name: "Category", width: "w-[120px]" },
-                          { id: 3, name: "Description", width: "w-[168px]" },
-                          { id: 4, name: "Zone" },
-                          { id: 5, name: "Quantity" },
-                          { id: 6, name: "Unit" },
-                          { id: 7, name: "Rate Type" },
-                          { id: 8, name: "Sizes" },
-                          { id: 9, name: "Base Price" },
-                          { id: 10, name: "Total Price" },
-                        ]?.map((item) => (
-                          <th
-                            className={`font-normal py-1 px-3 text-sm text-[#575F6E] text-left ${item?.width ? item.width : ""}`}
-                            key={item.id}
-                          >
-                            {item.name}
-                          </th>
-                        ))}
-                      </tr>
-                    </thead>
-
-                    <tbody>
-                      <tr className="font-noto text-xs font-medium">
-                        <td className="px-3 py-2 text-sm">1</td>
-                        <td className="truncate px-3 py-2 underline text-sm text-[#346DFF]">
-                          <span className="cursor-pointer">
-                            Kitchen Equipments
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
                           </span>
                         </td>
-                        <td className="truncate px-3 py-2">
-                          Top Made By 16 Swg. & U/s. Made By 18 Swg. 304 Grade,
-                          Top Boarder Size 65mm And U/s. Boarder Size 38mm,
-                          Vertical Pipe 38mm x 38mm x 16 Swg, Two U/s. In Pipe
-                          Section, And Vertical Pipe Should Be On Adjustable
-                          With Nylon Bullet Feet.
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
+                          </span>
                         </td>
-                        <td className="px-3 py-2">Kitchen</td>
-                        <td className="px-3 py-2">6</td>
-                        <td className="px-3 py-2">Pcs</td>
-                        <td className="px-3 py-2">Rate Contract</td>
-                        <td className="px-3 py-2">1350 x 700 x 800</td>
-                        <td className="px-3 py-2">₹5,000</td>
-                        <td className="px-3 py-2 text-primary text-sm">
-                          ₹30,000
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
+                        </td>
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
                         </td>
                       </tr>
 
                       <tr className="font-noto text-xs font-medium">
-                        <td className="px-3 py-2 text-sm">1</td>
-                        <td className="truncate px-3 py-2 underline text-sm text-[#346DFF]">
-                          <span className="cursor-pointer">
-                            Kitchen Equipments
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
+                        </td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
                           </span>
                         </td>
-                        <td className="truncate px-3 py-2">
-                          Top Made By 16 Swg. & U/s. Made By 18 Swg. 304 Grade,
-                          Top Boarder Size 65mm And U/s. Boarder Size 38mm,
-                          Vertical Pipe 38mm x 38mm x 16 Swg, Two U/s. In Pipe
-                          Section, And Vertical Pipe Should Be On Adjustable
-                          With Nylon Bullet Feet.
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
+                          </span>
                         </td>
-                        <td className="px-3 py-2">Kitchen</td>
-                        <td className="px-3 py-2">6</td>
-                        <td className="px-3 py-2">Pcs</td>
-                        <td className="px-3 py-2">Rate Contract</td>
-                        <td className="px-3 py-2">1350 x 700 x 800</td>
-                        <td className="px-3 py-2">₹5,000</td>
-                        <td className="px-3 py-2 text-primary text-sm">
-                          ₹30,000
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
+                        </td>
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
                         </td>
                       </tr>
 
                       <tr className="font-noto text-xs font-medium">
-                        <td className="px-3 py-2 text-sm">1</td>
-                        <td className="truncate px-3 py-2 underline text-sm text-[#346DFF]">
-                          <span className="cursor-pointer">
-                            Kitchen Equipments
+                        <td className="p-3">
+                          <div className="border rounded-lg w-16 h-16 relative overflow-hidden">
+                            <Image src="/chair.png" fill alt="chair-icon" />
+                          </div>
+                        </td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Design wala, ergonomic chair
                           </span>
                         </td>
-                        <td className="truncate px-3 py-2">
-                          Top Made By 16 Swg. & U/s. Made By 18 Swg. 304 Grade,
-                          Top Boarder Size 65mm And U/s. Boarder Size 38mm,
-                          Vertical Pipe 38mm x 38mm x 16 Swg, Two U/s. In Pipe
-                          Section, And Vertical Pipe Should Be On Adjustable
-                          With Nylon Bullet Feet.
-                        </td>
-                        <td className="px-3 py-2">Kitchen</td>
-                        <td className="px-3 py-2">6</td>
-                        <td className="px-3 py-2">Pcs</td>
-                        <td className="px-3 py-2">Rate Contract</td>
-                        <td className="px-3 py-2">1350 x 700 x 800</td>
-                        <td className="px-3 py-2">₹5,000</td>
-                        <td className="px-3 py-2 text-primary text-sm">
-                          ₹30,000
-                        </td>
-                      </tr>
-                      <tr className="font-noto text-xs font-medium">
-                        <td className="px-3 py-2 text-sm">1</td>
-                        <td className="truncate px-3 py-2 underline text-sm text-[#346DFF]">
-                          <span className="cursor-pointer">
-                            Kitchen Equipments
+
+                        <td className="p-3">Green ergonomic chair</td>
+
+                        <td className="p-3">
+                          <span className="cursor-pointer text-[#346DFF] underline">
+                            Chair
                           </span>
                         </td>
-                        <td className="truncate px-3 py-2">
-                          Top Made By 16 Swg. & U/s. Made By 18 Swg. 304 Grade,
-                          Top Boarder Size 65mm And U/s. Boarder Size 38mm,
-                          Vertical Pipe 38mm x 38mm x 16 Swg, Two U/s. In Pipe
-                          Section, And Vertical Pipe Should Be On Adjustable
-                          With Nylon Bullet Feet.
+
+                        <td className="p-3">Meeting room (6 seater)</td>
+
+                        <td className="p-3">1350 x 700 x 800</td>
+
+                        <td className="p-3">Pcs</td>
+
+                        <td className="p-3">
+                          <div className="w-14 h-[30px] bg-[#F1F1F1] rounded-lg py-1 px-3 flex items-center text-sm">
+                            6
+                          </div>
                         </td>
-                        <td className="px-3 py-2">Kitchen</td>
-                        <td className="px-3 py-2">6</td>
-                        <td className="px-3 py-2">Pcs</td>
-                        <td className="px-3 py-2">Rate Contract</td>
-                        <td className="px-3 py-2">1350 x 700 x 800</td>
-                        <td className="px-3 py-2">₹5,000</td>
-                        <td className="px-3 py-2 text-primary text-sm">
-                          ₹30,000
+
+                        <td className="p-3">Rate Contract</td>
+
+                        <td className="p-3">₹8,940</td>
+
+                        <td className="p-3 text-primary">₹50,940</td>
+
+                        <td className="p-3">
+                          <div className="flex items-center justify-center gap-3">
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/PencilGrey.svg"
+                                width={13}
+                                height={13}
+                                alt="edit"
+                              />
+                            </div>
+                            <div className="w-6 h-6 cursor-pointer rounded flex items-center justify-center border border-[#D1D2D3]">
+                              <Image
+                                src="/Trash.svg"
+                                width={16}
+                                height={16}
+                                alt="edit"
+                              />
+                            </div>
+                          </div>
                         </td>
                       </tr>
                     </tbody>
