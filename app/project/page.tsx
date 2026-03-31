@@ -573,6 +573,7 @@ const Project = () => {
                   </p>
 
                   <TextArea
+                    placeholder="Type here"
                     autoSize={{ minRows: 3, maxRows: 3 }}
                     className="!mt-1"
                   />
@@ -597,15 +598,17 @@ const Project = () => {
                           />
                         </div>
 
-                        <p className="mt-3 font-noto font-medium text-xs">
+                        <p className="mt-4 font-noto font-medium text-sm">
                           Import from Revit
                         </p>
-                        <p className="mt-1 text-[10px] font-noto text-center text-[#59595C]">
+                        <p className="mt-1 text-xs font-noto text-center text-[#59595C]">
                           Upload .rvt file to auto-populate BOQ
                         </p>
                       </div>
                     </div>
-                    <div>Or</div>
+                    <div className="font-noto text-sm text-[#59595C] font-medium">
+                      Or
+                    </div>
                     <div className="p-3 border border-[#E5E6E6] rounded-lg flex-1">
                       <div className="flex items-center justify-center flex-col">
                         <div className="p-3 rounded bg-[#F1F1F1] flex items-center justify-center w-11 h-11">
@@ -617,10 +620,10 @@ const Project = () => {
                           />
                         </div>
 
-                        <p className="mt-3 font-noto font-medium text-xs">
+                        <p className="mt-4 font-noto font-medium text-sm">
                           Add Manually
                         </p>
-                        <p className="mt-1 text-[10px] font-noto text-center text-[#59595C]">
+                        <p className="mt-1 text-xs font-noto text-center text-[#59595C]">
                           Create spaces and add items step by step
                         </p>
                       </div>

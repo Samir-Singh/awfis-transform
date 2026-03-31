@@ -1,16 +1,20 @@
 "use client";
 
-import { Collapse, Dropdown, MenuProps, Select } from "antd";
+import { Collapse, Dropdown, MenuProps, Modal, Select } from "antd";
 import Image from "next/image";
 import { useState } from "react";
 
 const ProjectDetails = () => {
   const [selectedTab, setSelectedTab] = useState<string>("Kitchen Equipments");
+  const [createNewBOQ, setCreateNewBOQ] = useState(false);
 
   const items: MenuProps["items"] = [
     {
       label: (
-        <div className="font-noto text-[#E91000] flex items-center gap-3 text-sm">
+        <div
+          onClick={() => setCreateNewBOQ(true)}
+          className="font-noto text-[#E91000] flex items-center gap-3 text-sm"
+        >
           <Image src="/PlusPrimary.svg" width={20} height={20} alt="plus" />
           Create new BOQ
         </div>
@@ -649,6 +653,114 @@ const ProjectDetails = () => {
           )}
         />
       </div>
+
+      <Modal
+        open={createNewBOQ}
+        closable={false}
+        footer={false}
+        centered={true}
+        onCancel={() => setCreateNewBOQ(false)}
+      >
+        <div className="outline-none">
+          <div className="py-4 px-5 flex items-center justify-between border-b border-[#E5E6E6]">
+            <span className="font-noto text-sm font-semibold">
+              Create New BOQ
+            </span>
+            <Image
+              onClick={() => setCreateNewBOQ(false)}
+              src="/Close.svg"
+              width={16}
+              height={16}
+              alt="close-icon"
+              className="cursor-pointer"
+            />
+          </div>
+
+          <div className="p-5">
+            <p className="font-noto text-[#59595C] text-xs font-medium">
+              Upload BOQ *
+            </p>
+
+            <div className="mt-1 flex items-center gap-4">
+              <div className="p-3 border border-[#E5E6E6] rounded-lg flex-1">
+                <div className="flex items-center justify-center flex-col">
+                  <div className="p-3 rounded bg-[#F1F1F1] flex items-center justify-center w-11 h-11">
+                    <Image
+                      src="/UploadSimple.svg"
+                      width={20}
+                      height={20}
+                      alt="note-pencil"
+                    />
+                  </div>
+
+                  <p className="mt-4 font-noto font-medium text-sm">
+                    Import from Revit
+                  </p>
+                  <p className="mt-1 text-xs font-noto text-center text-[#59595C]">
+                    Upload .rvt file to auto-populate BOQ
+                  </p>
+                </div>
+              </div>
+              <div className="font-noto text-sm text-[#59595C] font-medium">
+                Or
+              </div>
+              <div className="p-3 border border-[#E5E6E6] rounded-lg flex-1">
+                <div className="flex items-center justify-center flex-col">
+                  <div className="p-3 rounded bg-[#F1F1F1] flex items-center justify-center w-11 h-11">
+                    <Image
+                      src="/NotePencil.svg"
+                      width={20}
+                      height={20}
+                      alt="note-pencil"
+                    />
+                  </div>
+
+                  <p className="mt-4 font-noto font-medium text-sm">
+                    Add Manually
+                  </p>
+                  <p className="mt-1 text-xs font-noto text-center text-[#59595C]">
+                    Create spaces and add items step by step
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-3 rounded-lg border border-[#E5E6E6] flex items-center justify-between mt-3">
+              <div className="flex items-center gap-2">
+                <Image
+                  src="/Folder.svg"
+                  width={36}
+                  height={36}
+                  alt="folder-icon"
+                />
+                <div className="font-noto text-xs">
+                  <p className="font-medium">Assets.rvt</p>
+                  <p className="mt-[2px] text-[#929497]">5.3MB</p>
+                </div>
+              </div>
+              <Image
+                src="/Trash.svg"
+                width={16}
+                height={16}
+                alt="delete"
+                className="cursor-pointer"
+              />
+            </div>
+          </div>
+
+          <div className="py-4 px-5 flex items-center justify-between border-t border-[#E5E6E6]">
+            <button
+              onClick={() => setCreateNewBOQ(false)}
+              className="w-[93px] h-9 flex items-center justify-center border border-primary rounded-lg font-medium text-primary"
+            >
+              Cancel
+            </button>
+            <button className="w-[93px] h-9 flex items-center justify-center border border-primary rounded-lg font-medium text-white bg-primary">
+              Upload
+            </button>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };
