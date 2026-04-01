@@ -3,9 +3,11 @@
 import { Collapse, Dropdown, MenuProps, Modal, Select } from "antd";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const ProjectDetails = () => {
+  const router = useRouter();
   const [selectedTab, setSelectedTab] = useState<string>("Chair");
   const [createNewBOQ, setCreateNewBOQ] = useState(false);
   const [showSidebar, setShowSidebar] = useState({
@@ -90,7 +92,10 @@ const ProjectDetails = () => {
               <p className="text-sm font-medium">₹ 50,000</p>
             </div>
 
-            <button className="text-white bg-primary px-5 h-9 flex items-center justify-center rounded-lg font-medium text-sm">
+            <button
+              onClick={() => router.push("/project/quotation")}
+              className="text-white bg-primary px-5 h-9 flex items-center justify-center rounded-lg font-medium text-sm"
+            >
               Generate Quotation
             </button>
           </div>
@@ -1416,7 +1421,7 @@ const ProjectDetails = () => {
                 />
               </div>
 
-              <div className="w-40 border-r border-[#D1D2D3] h-full p-4">
+              <div className="w-40 h-full p-4">
                 <div className="w-full h-32 border border-[#D1D2D3] rounded-lg overflow-hidden relative">
                   <Image
                     src="/chair.png"
@@ -1437,7 +1442,7 @@ const ProjectDetails = () => {
                 </div>
               </div>
 
-              <div className="flex-1 overflow-y-auto pb-4">
+              <div className="flex-1 overflow-y-auto">
                 {!showItemDetails ? (
                   <>
                     <div className="p-4 sticky top-0 left-0 right-0 z-50 bg-white">
@@ -1505,7 +1510,7 @@ const ProjectDetails = () => {
                       </div>
                     </div>
 
-                    <div className="grid-cols-3 gap-4 grid px-4">
+                    <div className="grid-cols-3 gap-4 grid px-4 pb-4">
                       {[
                         { id: 1 },
                         { id: 2 },
@@ -1543,16 +1548,16 @@ const ProjectDetails = () => {
                   <>
                     <div className="py-6 px-4 flex items-center sticky top-0 left-0 right-0 z-50 bg-white">
                       <Image
-                        src="/ArrowLeft.svg"
+                        src="/ArrowRight.svg"
                         width={20}
                         height={20}
-                        alt="arrow-left"
-                        className="cursor-pointer"
+                        alt="arrow-right"
+                        className="cursor-pointer filter invert rotate-180"
                         onClick={() => setShowItemDetails(false)}
                       />
                     </div>
 
-                    <div className="px-4 font-noto">
+                    <div className="px-4 font-noto pb-4">
                       <div className="w-full h-[340px] relative border border-[#D1D2D3] rounded-xl overflow-hidden">
                         <Image
                           src="/Chair.png"
@@ -1579,12 +1584,12 @@ const ProjectDetails = () => {
 
                         <div className="flex items-center gap-[6px] font-medium">
                           <span>₹5,000</span>
-                          <span className="line-through text-sm text-[#929497]">
+                          {/* <span className="line-through text-sm text-[#929497]">
                             ₹ (11,999)
                           </span>
                           <span className="text-[#073611] text-sm">
                             30% OFF
-                          </span>
+                          </span> */}
                         </div>
 
                         <div>
@@ -1602,6 +1607,13 @@ const ProjectDetails = () => {
                         <hr className="border-dashed" />
                       </div>
 
+                      <p className="mt-4 text-sm text-[#575F6E]">
+                        Seller:{" "}
+                        <span className="text-primary underline">
+                          Galaxy Furniture
+                        </span>
+                      </p>
+
                       <div className="mt-4">
                         <div className="text-sm">Product Details</div>
 
@@ -1612,6 +1624,52 @@ const ProjectDetails = () => {
                           <p>Type: Office chair</p>
                           <p>Back Height: High Black</p>
                         </div>
+                      </div>
+                    </div>
+
+                    <div
+                      style={{
+                        boxShadow: "0 4px 16px 0 rgba(135, 135, 135, 0.25)",
+                      }}
+                      className="sticky left-0 right-0 bottom-0 bg-white z-50 p-6 pt-4 flex items-center justify-between"
+                    >
+                      <div className="font-noto">
+                        <p className="text-sm font-medium text-[#59595C]">
+                          Quantity
+                        </p>
+                        <div className="flex border border-[#D1D2D3] rounded-lg w-[152px] h-9 mt-2">
+                          <div className="w-9 flex items-center justify-center border-r border-[#D1D2D3] cursor-pointer">
+                            <Image
+                              src="/Minus.svg"
+                              width={20}
+                              height={20}
+                              alt="minus"
+                            />
+                          </div>
+                          <div className="flex-1 flex justify-center items-center font-medium">
+                            1
+                          </div>
+                          <div className="w-9 flex items-center justify-center border-l border-[#D1D2D3] cursor-pointer">
+                            <Image
+                              src="/PlusPrimary.svg"
+                              width={20}
+                              height={20}
+                              alt="plus"
+                              unoptimized
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <p className="text-[#59595C] text-sm font-noto font-medium">
+                          Total Amount:{" "}
+                          <span className="text-[#231F1F]">₹50,940</span>
+                        </p>
+
+                        <button className="mt-2 bg-primary text-white w-[146px] h-9 flex items-center justify-center rounded-lg font-medium text-sm">
+                          Replace & Add
+                        </button>
                       </div>
                     </div>
                   </>
