@@ -1,6 +1,12 @@
+"use client";
+
+import { Modal } from "antd";
 import Image from "next/image";
+import { useState } from "react";
 
 const Quotation = () => {
+  const [exportModal, setExportModal] = useState(false);
+
   return (
     <>
       <div className="sticky top-0 z-50 bg-white">
@@ -31,6 +37,7 @@ const Quotation = () => {
           <div className="flex justify-end">
             <button
               style={{ background: "rgba(255, 255, 255, 0.20)" }}
+              onClick={() => setExportModal(true)}
               className="w-[106px] h-9 flex items-center justify-center border border-[#FFF] rounded-lg text-sm font-medium gap-1 cursor-pointer"
             >
               <Image src="/Export.svg" width={16} height={16} alt="export" />
@@ -149,6 +156,63 @@ const Quotation = () => {
           </table>
         </div>
       </div>
+
+      <Modal
+        open={exportModal}
+        closable={false}
+        footer={false}
+        centered={true}
+        width={480}
+        onCancel={() => setExportModal(false)}
+      >
+        <div className="bg-white px-5 rounded-lg font-noto">
+          <div className="py-4 flex items-center justify-between">
+            <span className="text-sm font-semibold">Export</span>
+            <Image
+              src="/Close.svg"
+              width={16}
+              height={16}
+              alt="cross-icon"
+              className="cursor-pointer"
+              onClick={() => setExportModal(false)}
+            />
+          </div>
+
+          <div className="py-5 flex gap-4">
+            <div className="p-3 rounded-lg border border-[#E5E6E6] flex-1 flex flex-col items-center cursor-pointer">
+              <div className="p-3 rounded bg-[#F1F1F1] w-11 h-11 flex items-center justify-center">
+                <Image
+                  src="/FilePdf.svg"
+                  width={20}
+                  height={20}
+                  alt="pdf-icon"
+                />
+              </div>
+              <p className="mt-4 text-sm font-medium">Export as PDF</p>
+              <p className="mt-1 text-[#59595C] text-xs text-center">
+                The file will exported in .pdf format
+              </p>
+            </div>
+            <div className="text-[#59595C] font-medium flex items-center justify-center">
+              Or
+            </div>
+            <div className="p-3 rounded-lg border border-[#E5E6E6] flex-1 flex flex-col items-center cursor-pointer">
+              <div className="p-3 rounded bg-[#F1F1F1] w-11 h-11 flex items-center justify-center">
+                <Image
+                  src="/MicrosoftExcelLogo.svg"
+                  width={20}
+                  height={20}
+                  alt="excel-icon"
+                />
+              </div>
+              <p className="mt-4 text-sm font-medium">Export as Excel</p>
+              <p className="mt-1 text-[#59595C] text-xs text-center">
+                The file will exported in .xls format
+              </p>
+            </div>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };
