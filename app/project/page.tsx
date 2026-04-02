@@ -304,8 +304,8 @@ const Project = () => {
           setStep(1);
         }}
       >
-        <div className="rounded-lg font-noto">
-          <div className="px-6 py-4 flex items-center justify-between border-b border-[#E5E6E6]">
+        <div className="rounded-lg font-noto flex flex-col max-h-[80vh] overflow-y-auto custom-scrollbar">
+          <div className="px-6 py-4 flex items-center justify-between border-b border-[#E5E6E6] sticky top-0 bg-white z-10">
             <div>
               <p className="font-noto text-sm font-semibold">
                 Create New Project
@@ -656,7 +656,7 @@ const Project = () => {
             )}
           </div>
 
-          <div className="px-6 py-4 flex items-center justify-between border-t border-[#E5E6E6]">
+          <div className="px-6 py-4 flex items-center justify-between border-t border-[#E5E6E6] sticky bottom-0 bg-white z-10">
             <button
               onClick={() => {
                 setModal((prev) => ({
